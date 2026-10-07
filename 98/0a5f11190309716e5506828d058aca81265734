@@ -1,0 +1,29 @@
+.github/workflows/publish.yml
+  s_60ee5a08a58bdd::t_4e63631e0bea5f 1-25
+README.md
+  s_60ee5a08a58bdd::t_b4b53f863c7455 1-19,208-219
+lib/constants.js
+  s_60ee5a08a58bdd::t_9c66fa576cfd75 5
+lib/parse.js
+  s_60ee5a08a58bdd::t_a2ce243cdb3730 11,43-44,203-208
+package.json
+  s_60ee5a08a58bdd::t_6b37a228c1057f 2,4-5,14-17,19,22-24
+test/max-depth.js
+  s_60ee5a08a58bdd::t_0c74cea70e724c 1-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "980a5f11190309716e5506828d058aca81265734",
+  "prompts": {},
+  "sessions": {
+    "s_60ee5a08a58bdd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3423f8d6-1581-4453-9f1c-80412b3dc010",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "xz-ascent <153274626+xz-ascent@users.noreply.github.com>"
+    }
+  }
+}
