@@ -1,3 +1,22 @@
+# @ascentplatform/braces (temporary security fork)
+
+> **Temporary security fork of [micromatch/braces](https://github.com/micromatch/braces) - fixes [GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) (stack-exhaustion DoS from deeply nested brace patterns, upstream [issue #70](https://github.com/micromatch/braces/issues/70)).**
+>
+> **CHECK UPSTREAM ([github.com/micromatch/braces](https://github.com/micromatch/braces), npm [`braces`](https://www.npmjs.com/package/braces)) and REVERT/DELETE this fork once `braces` ships a patched release > 3.0.3.**
+
+This is `braces@3.0.3` plus one change: `parse()` now throws a catchable `SyntaxError` when brace nesting exceeds `options.maxDepth` (default `100`), instead of letting the recursive `compile`/`expand` walkers overflow the call stack. Everything else is unchanged, and the upstream license (MIT) and authorship are kept. Published as `@ascentplatform/braces@3.0.4` to GitHub Packages from the `security-fix` branch (tag `v3.0.4`).
+
+### Reverting when upstream is patched
+
+1. Confirm a `braces` release newer than 3.0.3 that fixes GHSA-vfj7-8cjw-p6xm exists (`npm view braces version`, and the advisory's "first patched version").
+2. In each consuming repo, remove the `braces: npm:@ascentplatform/braces@3.0.4` override (pnpm `overrides`, or npm/yarn `overrides`/`resolutions`), and if needed bump `micromatch` so it depends on the patched `braces`.
+3. Re-install (`pnpm install`), and confirm the lockfile no longer contains `@ascentplatform/braces` and the `braces` entry is the patched version.
+4. Delete the GitHub package `@ascentplatform/braces` and archive or delete the `AscentPlatform/braces` repository.
+
+The upstream README follows unchanged except for the added `options.maxDepth` section.
+
+---
+
 # braces [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W8YFZ425KND68) [![NPM version](https://img.shields.io/npm/v/braces.svg?style=flat)](https://www.npmjs.com/package/braces) [![NPM monthly downloads](https://img.shields.io/npm/dm/braces.svg?style=flat)](https://npmjs.org/package/braces) [![NPM total downloads](https://img.shields.io/npm/dt/braces.svg?style=flat)](https://npmjs.org/package/braces) [![Linux Build Status](https://img.shields.io/travis/micromatch/braces.svg?style=flat&label=Travis)](https://travis-ci.org/micromatch/braces)
 
 > Bash-like brace expansion, implemented in JavaScript. Safer than other brace expansion libs, with complete support for the Bash 4.3 braces specification, without sacrificing speed.
@@ -184,6 +203,18 @@ console.log(braces.expand('a{b}c'));
 
 ```js
 console.log(braces('a/{b,c}/d', { maxLength: 3 })); //=> throws an error
+```
+
+### options.maxDepth
+
+**Type**: `Number`
+
+**Default**: `100`
+
+**Description**: Limit how deeply braces may be nested. Deeper input throws a `SyntaxError` instead of exhausting the call stack in the recursive walkers. (Added in the `@ascentplatform/braces` security fork, GHSA-vfj7-8cjw-p6xm.)
+
+```js
+console.log(braces('a{b,{c,d}}', { maxDepth: 1 })); //=> throws an error
 ```
 
 ### options.expand

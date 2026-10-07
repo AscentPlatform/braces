@@ -1,8 +1,8 @@
 {
-  "name": "braces",
+  "name": "@ascentplatform/braces",
   "description": "Bash-like brace expansion, implemented in JavaScript. Safer than other brace expansion libs, with complete support for the Bash 4.3 braces specification, without sacrificing speed.",
-  "version": "3.0.3",
-  "homepage": "https://github.com/micromatch/braces",
+  "version": "3.0.4",
+  "homepage": "https://github.com/AscentPlatform/braces",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "contributors": [
     "Brian Woodward (https://twitter.com/doowb)",
@@ -11,11 +11,17 @@
     "hemanth.hm (http://h3manth.com)",
     "Jon Schlinkert (http://twitter.com/jonschlinkert)"
   ],
-  "repository": "micromatch/braces",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AscentPlatform/braces.git"
+  },
   "bugs": {
-    "url": "https://github.com/micromatch/braces/issues"
+    "url": "https://github.com/AscentPlatform/braces/issues"
   },
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "files": [
     "index.js",
     "lib"
